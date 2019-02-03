@@ -1,0 +1,13 @@
+language: cpp
+
+matrix:
+        include:
+                - os: linux
+                  name: "Linux Build"
+                  before_script:
+                          - sudo apt-get install -y xorg-dev
+                  script:
+                          - mkdir build
+                          - cd build
+                          - cmake ..
+                          - make
