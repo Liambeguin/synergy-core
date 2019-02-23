@@ -11,3 +11,10 @@ matrix:
                           - cd build
                           - cmake ..
                           - make
+                - os: windows
+                  name: "Windows Build"
+                  script:
+                          - mkdir build
+                          - cd build
+                          - cmake ..
+                          - cmake --build . --config Release 2>&1 >build.log
