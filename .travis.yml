@@ -11,6 +11,7 @@ matrix:
                           - cd build
                           - cmake ..
                           - make
+                          - tar cvf synergy-${TRAVIS_TAG}-Linux-$(uname -m).tar bin/*
                 - os: windows
                   name: "Windows Build"
                   script:
@@ -18,3 +19,16 @@ matrix:
                           - cd build
                           - cmake ..
                           - cmake --build . --config Release 2>&1 >build.log
+                          - tar cvf synergy-${TRAVIS_TAG}-Windows-$(uname -m).tar bin/**/*.exe
+
+deploy:
+        provider: releases
+        skip_cleanup: true
+        file_glob: true
+        file: synergy-${TRAVIS_TAG}-*-$(uname -m).tar
+        draft: true
+        on:
+                all_branches: true
+                tags: true
+        api_key:
+                secure: ZQEsBwfbK4S0sTLrG0InyE26dAPcGmqikNqOVrTK8sUzkdjRYK5VFVQn3L4nctgoWvRo5nlE0X7oovG+6YuqcoaHhZQooog6rvH3UsNUbCo63bceH3SR7BinxNksgLxdStbHEHEPr38kUfaDbwJZuGuPj8ENT0gNY694eExwc0K+IbWWkjnxRzOuOCdRqd7O/l3ZKz5R0n9wHTaxUVhhntR1K0MPcJZoc955epVWL5iHDcS+2oEcCqPA2VjfVmgRxW2/OzFjGhvGs5AjtZ8daCD6GngZSzLbX0EIVmLQZQq2W15781X5wVbGXNxoDproyKW9PPZ+qYwPNi+2Y12Cq67aLX57lv001SUbFUlcezcezzIbgoz5nVKyrGe6ujkWtnbcInq/jwrMxy7aJolaVWe4DrRKeeYpPL7zfpzxN1D6ajIMtgizw8KpE6xkpocg+JXEpmNUKzbFArm47EapPn8PmItfa0O+jVl9gZNXC22A7+Xm9CfkUNK9I0Ok1D6gUEM5r+D0tU8XOemmMVpJWo4IxTtiHwB+rTUbEGq2geU94EtiVB+gRmehqK++ran2XL3gzRG+isOehmhgUHqvkX9P1TSH2XAuX/241ymb97vK1OpadPS2g6f9btglHMzQoKBuTPdMOHczwofcrgiasq3DoWcpxdFyjeD1ND1qjRQ=
