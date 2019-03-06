@@ -11,6 +11,7 @@ matrix:
                           - cd build
                           - cmake ..
                           - make
+                          - ./bin/unittests
                           - tar cvf synergy-${TRAVIS_TAG}-Linux-$(uname -m).tar bin/*
                 - os: windows
                   name: "Windows Build"
