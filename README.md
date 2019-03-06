@@ -1,5 +1,7 @@
 # Synergy Core
 
+[![Build Status](https://travis-ci.org/Liambeguin/synergy-core.svg?branch=master)](https://travis-ci.org/Liambeguin/synergy-core)
+
 This is the open source core component of Synergy, a keyboard and mouse sharing tool.
 
 ## Recommended
