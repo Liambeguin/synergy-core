@@ -37,3 +37,5 @@ endif()
 add_executable(synergys ${sources})
 target_link_libraries(synergys
     arch base client common io mt net platform server core ${libs})
+
+install (TARGETS synergys DESTINATION bin)
