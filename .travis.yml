@@ -6,26 +6,21 @@ matrix:
                   name: "Linux Build"
                   before_script:
                           - sudo apt-get install -y xorg-dev
-                  script:
-                          - mkdir build
-                          - cd build
-                          - cmake ..
-                          - make
-                          - tar cvf synergy-${TRAVIS_TAG}-Linux-$(uname -m).tar bin/*
                 - os: windows
                   name: "Windows Build"
-                  script:
-                          - mkdir build
-                          - cd build
-                          - cmake ..
-                          - cmake --build . --config Release 2>&1 >build.log
-                          - tar cvf synergy-${TRAVIS_TAG}-Windows-$(uname -m).tar bin/**/*.exe
+
+script:
+        - mkdir build
+        - cd build
+        - cmake ..
+        - cmake --build . --config Release
+        - tar cvf synergy-${TRAVIS_TAG}-${TRAVIS_OS_NAME}-$(uname -m).tar bin/*
 
 deploy:
         provider: releases
         skip_cleanup: true
         file_glob: true
-        file: synergy-${TRAVIS_TAG}-*-$(uname -m).tar
+        file: synergy-${TRAVIS_TAG}-${TRAVIS_OS_NAME}-$(uname -m).tar
         draft: true
         on:
                 all_branches: true
