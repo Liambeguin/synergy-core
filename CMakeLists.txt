@@ -326,3 +326,30 @@ if (SYNERGY_TIDY)
                          arch base client common core io mt net platform server shared
                   PROPERTY CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
 endif()
+
+set (CPACK_GENERATOR "ZIP")
+set (CPACK_PACKAGE_NAME synergy)
+set (CPACK_PACKAGE_VERSION ${SYNERGY_VERSION})
+set (CPACK_SOURCE_GENERATOR "TBZ2;ZIP")
+set (CPACK_PACKAGE_CONTACT "engineering@symless.com")
+set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Keyboard and mouse sharing solution")
+
+include (InstallRequiredSystemLibraries)
+
+if (WIN32)
+	set (CPACK_GENERATOR ${CPACK_GENERATOR};WIX)
+elseif (APPLE)
+	set (CPACK_GENERATOR PACKAGEMAKER)
+	message (WARNING "macos package not yet supported")
+else ()
+	find_program (RPMBUILD rpmbuild)
+	if (RPMBUILD)
+		set (CPACK_GENERATOR ${CPACK_GENERATOR};RPM)
+		set (CPACK_RPM ON)
+
+		configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/dist/rpm/synergy.spec.in" "${CMAKE_CURRENT_BINARY_DIR}/synergy.spec" @ONLY IMMEDIATE)
+		set (CPACK_RPM_USER_BINARY_SPECFILE "${CMAKE_CURRENT_BINARY_DIR}/synergy.spec")
+	endif ()
+endif ()
+
+include (CPack)
