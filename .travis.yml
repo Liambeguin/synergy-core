@@ -13,14 +13,13 @@ script:
         - mkdir build
         - cd build
         - cmake ..
-        - cmake --build . --config Release
-        - tar cvf synergy-${TRAVIS_TAG}-${TRAVIS_OS_NAME}-$(uname -m).tar bin/*
+        - cmake --build . --config Release --target package
 
 deploy:
         provider: releases
         skip_cleanup: true
         file_glob: true
-        file: synergy-${TRAVIS_TAG}-${TRAVIS_OS_NAME}-$(uname -m).tar
+        file: synergy-*.zip
         draft: true
         on:
                 all_branches: true
