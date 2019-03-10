@@ -6,6 +6,7 @@ matrix:
                   name: "Linux Build"
                   before_script:
                           - sudo apt-get install -y xorg-dev
+                          - sudo apt-get install -y rpm
                 - os: windows
                   name: "Windows Build"
 
@@ -20,6 +21,7 @@ deploy:
         skip_cleanup: true
         file_glob: true
         file: synergy-*.zip
+        file: synergy-*.rpm
         draft: true
         on:
                 all_branches: true
