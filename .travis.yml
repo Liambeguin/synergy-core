@@ -9,6 +9,8 @@ matrix:
                           - sudo apt-get install -y rpm
                 - os: windows
                   name: "Windows Build"
+                  before_script:
+                          - choco install -y nsis
 
 script:
         - mkdir build
@@ -22,6 +24,7 @@ deploy:
         file_glob: true
         file: synergy-*.zip
         file: synergy-*.rpm
+        file: synergy-*.exe
         draft: true
         on:
                 all_branches: true

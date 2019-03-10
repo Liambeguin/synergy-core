@@ -339,7 +339,7 @@ set (SYNERGY_CORE_INSTALL)
 include (InstallRequiredSystemLibraries)
 
 if (WIN32)
-	set (CPACK_GENERATOR ${CPACK_GENERATOR};WIX)
+	set (CPACK_GENERATOR ${CPACK_GENERATOR};NSIS)
 elseif (APPLE)
 	set (CPACK_GENERATOR PACKAGEMAKER)
 	message (WARNING "macos package not yet supported")
