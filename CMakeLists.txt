@@ -352,6 +352,9 @@ else ()
 		configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/dist/rpm/synergy.spec.in" "${CMAKE_CURRENT_BINARY_DIR}/synergy.spec" @ONLY IMMEDIATE)
 		set (CPACK_RPM_USER_BINARY_SPECFILE "${CMAKE_CURRENT_BINARY_DIR}/synergy.spec")
 	endif ()
+
+	set (CPACK_GENERATOR ${CPACK_GENERATOR};DEB)
+	set (CPACK_DEB ON)
 endif ()
 
 include (CPack)
